@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>សទ្ទានុក្រមបច្ចេកវិទ្យា</title>
+    <title>សទ្ទានុក្រមបច្ចេកវិទ្យា ឌីជីថល</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;700&family=Moul&display=swap" rel="stylesheet">
     <style>
@@ -14,21 +14,22 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
         .category-tab.active { background-color: #1e40af; color: white; border-color: #1e40af; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .nav-btn.active { border-bottom: 4px solid #1e40af; color: #1e40af; font-weight: bold; }
+        .nav-btn.active { border-bottom: 4px solid #1e40af; color: #1e40af; font-weight: bold; background-color: #f1f5f9; }
+        .gradient-text { background: linear-gradient(to right, #2563eb, #9333ea); -webkit-background-clip: text; color: transparent; }
     </style>
 </head>
 <body class="min-h-screen pb-20">
 
     <!-- Header -->
     <header class="bg-blue-900 text-white py-8 px-4 shadow-xl sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
-                <h1 class="khmer-moul text-xl md:text-2xl mb-2 tracking-wide text-blue-50">សទ្ទានុក្រមបច្ចេកវិទ្យា (២០១ ពាក្យ)</h1>
-                <p class="text-blue-200 text-sm opacity-90">ប្រភព៖ សទ្ទានុក្រមវិទ្យាសាស្ត្រនិងបច្ចេកវិទ្យា ក្រុមប្រឹក្សាជាតិភាសាខ្មែរ</p>
+                <h1 class="khmer-moul text-xl md:text-3xl mb-2 tracking-wide text-blue-50">សទ្ទានុក្រមបច្ចេកវិទ្យា និងឌីជីថល</h1>
+                <p class="text-blue-200 text-sm opacity-90">សទ្ទានុក្រមផ្លូវការ (NCKL) និងពាក្យបច្ចេកទេសជំនាន់ថ្មី (AI Era)</p>
             </div>
-            <div id="searchContainer" class="relative w-full md:w-96">
+            <div id="searchContainer" class="relative w-full md:w-96 hidden">
                 <input type="text" id="searchInput" 
-                    placeholder="ស្វែងរកពាក្យខ្មែរ ឬអង់គ្លេស..." 
+                    placeholder="ស្វែងរកពាក្យ..." 
                     class="w-full py-3 pl-12 pr-6 rounded-2xl bg-blue-800/50 border border-blue-700/50 text-white placeholder-blue-300 focus:ring-4 focus:ring-blue-500/30 outline-none transition-all text-lg backdrop-blur-md">
                 <svg class="w-6 h-6 absolute left-4 top-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -38,17 +39,18 @@
     </header>
 
     <!-- Navigation Tabs -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="max-w-5xl mx-auto flex justify-around">
-            <button onclick="switchTab('browse')" id="tabBrowse" class="nav-btn active py-4 px-6 transition-all">ស្វែងរកពាក្យ</button>
-            <button onclick="switchTab('suggest')" id="tabSuggest" class="nav-btn py-4 px-6 transition-all">ស្នើពាក្យថ្មី 🚀</button>
+    <div class="bg-white shadow-sm border-b sticky top-[100px] md:top-[112px] z-40">
+        <div class="max-w-6xl mx-auto flex overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('official')" id="tabOfficial" class="nav-btn active py-4 px-6 md:px-8 transition-all whitespace-nowrap">📚 សទ្ទានុក្រមផ្លូវការ (២០១)</button>
+            <button onclick="switchTab('modern')" id="tabModern" class="nav-btn py-4 px-6 md:px-8 transition-all whitespace-nowrap">🚀 ពាក្យថ្មីៗ (AI & Tech)</button>
+            <button onclick="switchTab('suggest')" id="tabSuggest" class="nav-btn py-4 px-6 md:px-8 transition-all whitespace-nowrap">📝 ស្នើពាក្យថ្មី</button>
         </div>
     </div>
 
-    <!-- BROWSE TAB CONTENT -->
-    <section id="browseSection" class="block">
+    <!-- TAB 1: OFFICIAL LEXICON -->
+    <section id="officialSection" class="block">
         <div class="bg-slate-50 border-b">
-            <nav class="max-w-5xl mx-auto px-4 flex overflow-x-auto gap-3 no-scrollbar py-4 custom-scrollbar">
+            <nav class="max-w-6xl mx-auto px-4 flex overflow-x-auto gap-3 no-scrollbar py-4 custom-scrollbar">
                 <button onclick="filterCategory('All')" class="category-tab active whitespace-nowrap px-6 py-2 rounded-full font-bold text-sm transition-all border bg-white">ទាំងអស់</button>
                 <button onclick="filterCategory('Hardware')" class="category-tab whitespace-nowrap px-6 py-2 rounded-full bg-slate-100 text-slate-600 font-bold text-sm transition-all border border-transparent">ផ្នែករឹង</button>
                 <button onclick="filterCategory('Software')" class="category-tab whitespace-nowrap px-6 py-2 rounded-full bg-slate-100 text-slate-600 font-bold text-sm transition-all border border-transparent">ផ្នែកទន់</button>
@@ -58,20 +60,34 @@
             </nav>
         </div>
 
-        <main class="max-w-5xl mx-auto px-4 mt-8">
+        <main class="max-w-6xl mx-auto px-4 mt-8">
             <div class="mb-6 flex justify-between items-center px-2">
                 <h3 id="categoryLabel" class="text-slate-500 font-bold text-sm uppercase tracking-widest">ប្រភេទ: ទាំងអស់</h3>
                 <span id="resultCount" class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold shadow-sm">២០១ ពាក្យ</span>
             </div>
-            <div id="lexiconGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            <div id="lexiconGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
             <div id="emptyState" class="hidden text-center py-24">
                 <p class="text-slate-400 text-lg font-medium">រកមិនឃើញពាក្យដែលអ្នកស្វែងរកឡើយ</p>
             </div>
         </main>
     </section>
 
-    <!-- SUGGEST TAB CONTENT (Using Google Forms) -->
-    <section id="suggestSection" class="hidden max-w-5xl mx-auto px-4 mt-8">
+    <!-- TAB 2: MODERN TECH TERMS -->
+    <section id="modernSection" class="hidden max-w-6xl mx-auto px-4 mt-8">
+        <div class="mb-8 text-center md:text-left bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-[2rem] border border-blue-100">
+            <h2 class="khmer-moul text-2xl mb-4 gradient-text">បច្ចេកសព្ទឌីជីថលជំនាន់ថ្មី (Trending Tech Terms)</h2>
+            <p class="text-slate-600 text-lg leading-relaxed">
+                បណ្តុំពាក្យបច្ចេកទេសដែលកំពុងពេញនិយមខ្លាំងក្នុងយុគសម័យបញ្ញាសិប្បនិម្មិត (AI)។ ពាក្យទាំងនេះភាគច្រើនមិនទាន់មានការអនុម័តប្រែសម្រួលជាផ្លូវការនៅឡើយទេ ប៉ុន្តែត្រូវបានចងក្រងនិងពន្យល់ន័យយ៉ាងក្បោះក្បាយ ដើម្បីងាយស្រួលដល់ការសិក្សាស្រាវជ្រាវ។
+            </p>
+        </div>
+        
+        <div id="modernGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Modern Terms injected by JS -->
+        </div>
+    </section>
+
+    <!-- TAB 3: SUGGEST TERMS (Google Forms) -->
+    <section id="suggestSection" class="hidden max-w-6xl mx-auto px-4 mt-8">
         <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-[2rem] shadow-lg border border-slate-100 text-center">
             <div class="text-6xl mb-6">💡</div>
             <h2 class="khmer-moul text-2xl md:text-3xl text-blue-900 mb-4">ចូលរួមចងក្រងពាក្យបច្ចេកទេស</h2>
@@ -79,19 +95,17 @@
                 ដើម្បីឱ្យសទ្ទានុក្រមនេះកាន់តែសម្បូរបែប និងឆ្លើយតបទៅនឹងការវិវត្តនៃបច្ចេកវិទ្យាឌីជីថល សូមលោកគ្រូ អ្នកគ្រូ និងអ្នកជំនាញផ្នែក ICT ចូលរួមផ្ដល់ជាពាក្យបច្ចេកទេសថ្មីៗ។
             </p>
             
-            <!-- ប៊ូតុងនេះនឹងភ្ជាប់ទៅកាន់ Google Form របស់លោកគ្រូ -->
-            <!-- លោកគ្រូត្រូវប្តូរតំណរភ្ជាប់ (Link) ខាងក្រោមទៅជា Link Google Form របស់លោកគ្រូពិតប្រាកដ -->
             <a href="https://forms.gle/wXA32m7WQVwmVqvr9" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-900 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-blue-800 transition-all shadow-md hover:-translate-y-1 active:scale-95">
                 📝 បំពេញ Form ស្នើពាក្យ
             </a>
 
             <div class="mt-8 pt-8 border-t border-slate-100 text-sm text-slate-500 text-left">
-                <p class="font-bold mb-2">ព័ត៌មានដែលត្រូវការក្នុង Form៖</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>ពាក្យខ្មែរ (ឧ. បញ្ញាសិប្បនិម្មិត)</li>
-                    <li>ពាក្យអង់គ្លេស (ឧ. Artificial Intelligence)</li>
-                    <li>និយមន័យពន្យល់ខ្លីៗ</li>
-                    <li>ឈ្មោះរបស់អ្នកស្នើ (ដើម្បីផ្ដល់សិទ្ធិអ្នកនិពន្ធ)</li>
+                <p class="font-bold mb-2 text-slate-700">ព័ត៌មានដែលត្រូវការក្នុង Form៖</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong class="text-blue-800">ពាក្យខ្មែរ៖</strong> (ប្រសិនបើអាចប្រែបាន ឧ. បញ្ញាសិប្បនិម្មិត)</li>
+                    <li><strong class="text-blue-800">ពាក្យអង់គ្លេស៖</strong> (ឧ. Artificial Intelligence)</li>
+                    <li><strong class="text-blue-800">និយមន័យ៖</strong> ការពន្យល់ន័យយ៉ាងក្បោះក្បាយជាភាសាខ្មែរ</li>
+                    <li><strong class="text-blue-800">ឈ្មោះអ្នកស្នើ៖</strong> ដើម្បីផ្ដល់សិទ្ធិ ឬក្រេឌីតដល់អ្នកចូលរួម</li>
                 </ul>
             </div>
         </div>
@@ -100,25 +114,28 @@
     <!-- Modal Detail -->
     <div id="detailModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-[100]">
         <div class="bg-white rounded-[2rem] max-w-xl w-full overflow-hidden shadow-2xl transition-all" id="modalContent">
-            <div class="bg-blue-900 p-8 text-white relative">
+            <div id="modalHeader" class="bg-blue-900 p-8 text-white relative transition-colors">
                 <button onclick="closeModal()" class="absolute top-6 right-6 text-white/50 hover:text-white"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-                <span id="modalCat" class="inline-block px-3 py-1 bg-blue-700 rounded-lg text-[10px] font-black uppercase mb-3 tracking-widest">CATEGORY</span>
-                <h2 id="modalKh" class="khmer-moul text-2xl">ពាក្យ</h2>
-                <p id="modalEn" class="text-xl font-bold text-blue-300 italic uppercase mt-2"></p>
+                <span id="modalCat" class="inline-block px-3 py-1 bg-white/20 rounded-lg text-[10px] font-black uppercase mb-3 tracking-widest backdrop-blur-sm border border-white/30">CATEGORY</span>
+                <h2 id="modalKh" class="khmer-moul text-2xl md:text-3xl leading-relaxed">ពាក្យ</h2>
+                <p id="modalEn" class="text-xl font-bold text-blue-200 italic mt-2 font-mono tracking-widest"></p>
             </div>
             <div class="p-8 space-y-6">
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100"><p id="modalDef" class="text-slate-700 text-lg leading-relaxed"></p></div>
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                    <span class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">និយមន័យ (Definition)</span>
+                    <p id="modalDef" class="text-slate-700 text-lg leading-relaxed"></p>
+                </div>
             </div>
             <div class="p-6 bg-slate-50 border-t flex justify-end">
-                <button onclick="closeModal()" class="px-10 py-3 bg-blue-900 text-white rounded-2xl font-bold">យល់ព្រម</button>
+                <button onclick="closeModal()" class="px-10 py-3 bg-blue-900 text-white rounded-2xl font-bold shadow-md hover:bg-blue-800 transition-all">យល់ព្រម</button>
             </div>
         </div>
     </div>
 
     <!-- Script Section -->
     <script>
-        // បញ្ជីទិន្នន័យទាំង ២០១ ពាក្យ ស្រង់ចេញពីសទ្ទានុក្រមបច្ចេកវិទ្យា (NCKL 2014)
-        const fullLexicon = [
+        // ១. សទ្ទានុក្រមផ្លូវការ (២០១ ពាក្យ) ស្រង់ចេញពី NCKL 2014
+        const officialLexicon = [
             { id: 1, cat: "Hardware", kh: "កណ្ដុរ", en: "mouse", def: "ឧបករណ៍តូចមួយដែលចល័តលើផ្ទៃរាបដើម្បីត្រួតពិនិត្យទីតាំងនៃសញ្ញាចង្អុលនៅលើអេក្រង់។" },
             { id: 2, cat: "Software", kh: "កម្មវិធី", en: "application / program", def: "សុសវែរសម្រាប់បញ្ជាកុំព្យូទ័របំពេញការងារ ដូចជាកម្មវិធីវាយអត្ថបទ គូរប្លង់...។" },
             { id: 3, cat: "Hardware", kh: "កាត", en: "card", def: "បន្ទះឬបណ្ណដែលអាចឱ្យមានទំនាក់ទំនងជាមួយនឹងឧបករណ៍មួយ ឬបន្ទះសៀគ្វីអគ្គិសនីមួយ។" },
@@ -322,34 +339,61 @@
             { id: 201, cat: "General", kh: "ឧបករណ៍", en: "tool", def: "សំណុំកម្មវិធីឬប្រដាប់ប្រដាសម្រាប់ប្រើក្នុងកុំព្យូទ័រ ឬក្នុងបណ្តាញ។" }
         ];
 
-        // Local UI Logic
-        window.switchTab = (tab) => {
-            const browse = document.getElementById('browseSection');
-            const suggest = document.getElementById('suggestSection');
-            const tabB = document.getElementById('tabBrowse');
-            const tabS = document.getElementById('tabSuggest');
-            const search = document.getElementById('searchContainer');
-
-            if(tab === 'browse') {
-                browse.classList.remove('hidden');
-                suggest.classList.add('hidden');
-                tabB.classList.add('active');
-                tabS.classList.remove('active');
-                search.classList.remove('hidden');
-            } else {
-                browse.classList.add('hidden');
-                suggest.classList.remove('hidden');
-                tabB.classList.remove('active');
-                tabS.classList.add('active');
-                search.classList.add('hidden');
-            }
-        };
+        // ២. បញ្ជីពាក្យថ្មីៗ (Modern Tech Terms - ក្រៅសទ្ទានុក្រម)
+        const modernLexicon = [
+            { cat: "AI & Data", kh: "បញ្ញាសិប្បនិម្មិត", en: "Artificial Intelligence (AI)", def: "វិទ្យាសាស្ត្រកុំព្យូទ័រដែលផ្តោតលើការបង្កើតម៉ាស៊ីនឱ្យមានសមត្ថភាពគិត វិភាគ រៀនសូត្រ និងសម្រេចចិត្តបានដូចជាមនុស្សពិតប្រាកដ។" },
+            { cat: "AI & Data", kh: "ម៉ាស៊ីនសិក្សា", en: "Machine Learning (ML)", def: "អនុវិស័យនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលផ្តល់សមត្ថភាពឱ្យប្រព័ន្ធកុំព្យូទ័រអាច 'រៀន' ពីទិន្នន័យចាស់ៗ និងកែលម្អភាពត្រឹមត្រូវរបស់វាដោយស្វ័យប្រវត្តិ ដោយមិនចាំបាច់មានមនុស្សសរសេរកូដបញ្ជាគ្រប់ជំហានឡើយ។" },
+            { cat: "AI & Data", kh: "ការសិក្សាស៊ីជម្រៅ", en: "Deep Learning (DL)", def: "បច្ចេកទេសកម្រិតខ្ពស់នៃ Machine Learning ដែលប្រើប្រាស់ 'បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត' (Artificial Neural Networks) មានច្រើនស្រទាប់ ដើម្បីត្រាប់តាមរបៀបដែលខួរក្បាលមនុស្សដំណើរការព័ត៌មាន។ វិស័យនេះពូកែខាងសម្គាល់រូបភាព និងសំឡេង។" },
+            { cat: "AI & Data", kh: "ការរៀនពង្រឹងកម្រិត", en: "Reinforcement Learning", def: "វិធីសាស្ត្របង្វឹក AI ឱ្យរៀនធ្វើការសម្រេចចិត្តតាមរយៈប្រព័ន្ធ 'រង្វាន់និងការពិន័យ' (Trial and Error)។ AI នឹងសាកល្បងរកវិធីណាដែលទទួលបានពិន្ទុខ្ពស់បំផុត ឧទាហរណ៍ ការបង្វឹក AI ឱ្យចេះលេងអុក ឬបើកបរឡានដោយខ្លួនឯង។" },
+            { cat: "Cloud & Web", kh: "កុំព្យូទ័រលើពពក", en: "Cloud Computing", def: "ការផ្តល់សេវាកម្មកុំព្យូទ័រ (ម៉ាស៊ីនមេ ឃ្លាំងផ្ទុកទិន្នន័យ មូលទិន្នន័យ ឬសូហ្វវែរ) តាមរយៈប្រព័ន្ធអ៊ីនធឺណិត (ពពក) ដោយមិនចាំបាច់មានម៉ាស៊ីនផ្ទាល់នៅកន្លែងធ្វើការ។" },
+            { cat: "Tech Trends", kh: "អ៊ីនធឺណិតនៃវត្ថុ", en: "Internet of Things (IoT)", def: "បណ្ដាញនៃឧបករណ៍រូបវន្ត (ដូចជានាឡិកា ទូទឹកកក រថយន្ត កាមេរ៉ា) ដែលមានភ្ជាប់សេនស័រ និងប្រព័ន្ធអ៊ិនធឺណិត ធ្វើឱ្យពួកវាអាចផ្លាស់ប្តូរទិន្នន័យគ្នាទៅវិញទៅមកបាន។" },
+            { cat: "Security", kh: "ប្លុកឆេន", en: "Blockchain", def: "ប្រព័ន្ធកត់ត្រាទិន្នន័យវិមជ្ឈការ (Decentralized) ដែលមានសុវត្ថិភាពខ្ពស់ និងមិនអាចកែប្រែ ឬលួចបន្លំបាន ដែលជាមូលដ្ឋានគ្រឹះនៃរូបិយប័ណ្ណគ្រីបតូ (Cryptocurrency)។" },
+            { cat: "AI & Data", kh: "ទិន្នន័យមហាសាល", en: "Big Data", def: "សំណុំទិន្នន័យដែលមានទំហំធំខ្លាំង និងស្មុគស្មាញ ដែលមិនអាចប្រមូល ផ្ទុក ឬវិភាគដោយប្រើប្រាស់កម្មវិធីគ្រប់គ្រងទិន្នន័យធម្មតាបានឡើយ។" },
+            { cat: "Security", kh: "សន្តិសុខសាយប័រ", en: "Cybersecurity", def: "ការអនុវត្តក្បួនបច្ចេកវិទ្យាដើម្បីការពារប្រព័ន្ធកុំព្យូទ័រ បណ្តាញ និងកម្មវិធីនានាពីការវាយប្រហារ លួចទិន្នន័យ ឬការបំផ្លាញតាមប្រព័ន្ធឌីជីថល។" },
+            { cat: "AR/VR", kh: "ភាពពិតនិម្មិត", en: "Virtual Reality (VR)", def: "បរិស្ថានក្លែងបន្លំទាំងស្រុងដែលបង្កើតឡើងដោយកុំព្យូទ័រ ដែលអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ពាក់វ៉ែនតាពិសេសដើម្បីចូលរួមធ្វើអន្តរកម្មដូចនៅក្នុងពិភពពិត។" },
+            { cat: "AR/VR", kh: "ភាពពិតបន្ថែម", en: "Augmented Reality (AR)", def: "បច្ចេកវិទ្យាដែលរួមបញ្ចូលព័ត៌មានឌីជីថល (រូបភាព សំឡេង ក្រាហ្វិកអណ្តែត) ទៅជាន់ពីលើបរិស្ថានពិតជាក់ស្តែងតាមរយៈកាមេរ៉ា ឬអេក្រង់ទូរសព្ទ។" },
+            { cat: "Programming", kh: "ចំណុចប្រទាក់កម្មវិធី", en: "API (Application Programming Interface)", def: "បណ្តុំកូដ និងប្រូតូកូលដែលដើរតួជា 'អ្នកនាំសារ' អនុញ្ញាតឱ្យកម្មវិធីកុំព្យូទ័រពីរ ឬប្រព័ន្ធពីរផ្សេងគ្នា អាចទំនាក់ទំនង និងផ្លាស់ប្តូរទិន្នន័យគ្នាបានយ៉ាងរលូន។" },
+            { cat: "Design", kh: "យូអាយ / យូអ៊ិច", en: "UI / UX Design", def: "UI (User Interface) គឺការរចនារូបរាងខាងក្រៅនៃកម្មវិធី (ពណ៌ ប៊ូតុង)។ ចំណែក UX (User Experience) ផ្តោតលើភាពងាយស្រួលនិងបទពិសោធន៍របស់អ្នកប្រើប្រាស់ពេលកំពុងប្រើកម្មវិធីនោះ។" },
+            { cat: "Programming", kh: "កូដចំហ", en: "Open Source", def: "សូហ្វវែរ ឬកម្មវិធីដែលត្រូវបានផ្តល់ជូនជាសាធារណៈ ដោយអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់គ្រប់រូបអាចមើល កែប្រែ ឬចែកចាយកូដដើមបានដោយសេរី ដោយមិនបាច់ទិញអាជ្ញាបណ្ណ។" },
+            { cat: "Future Tech", kh: "កុំព្យូទ័រកង់ទិច", en: "Quantum Computing", def: "បច្ចេកវិទ្យាកុំព្យូទ័រជំនាន់ថ្មីដែលប្រើប្រាស់គោលការណ៍ 'មេកានិចកង់ទិច' ដើម្បីដោះស្រាយបញ្ហាស្មុគស្មាញក្នុងល្បឿនលឿនជាងកុំព្យូទ័រធម្មតារាប់លានដង។" },
+            { cat: "AI & Data", kh: "វិស្វកម្មប្រម", en: "Prompt Engineering", def: "ជំនាញក្នុងការសរសេរ ឬរចនាពាក្យបញ្ជា (Prompts) ឱ្យបានច្បាស់លាស់និងមានប្រសិទ្ធភាព ដើម្បីប្រាស្រ័យទាក់ទងជាមួយ AI (ដូចជា ChatGPT) ក្នុងការទាញយកចម្លើយដែលត្រឹមត្រូវ និងមានប្រយោជន៍បំផុត។" },
+            { cat: "Programming", kh: "អភិវឌ្ឍន៍ផ្នែកខាងមុខ", en: "Front-End Development", def: "ការសរសេរកូដ (HTML, CSS, JS) ដើម្បីបង្កើតផ្នែកខាងមុខនៃវេបសាយ ឬកម្មវិធី ដែលអ្នកប្រើប្រាស់អាចមើលឃើញនិងចុចផ្ទាល់។" },
+            { cat: "Programming", kh: "អភិវឌ្ឍន៍ផ្នែកខាងក្រោយ", en: "Back-End Development", def: "ការសរសេរកូដដែលដំណើរការនៅលើម៉ាស៊ីនមេ (Server) និងមូលទិន្នន័យ ដែលជាឆ្អឹងខ្នងសម្រាប់គ្រប់គ្រងទិន្នន័យនិងឡូជីខលនៃកម្មវិធី។" },
+            { cat: "AI & Data", kh: "ដំណើរការភាសាធម្មជាតិ", en: "NLP (Natural Language Processing)", def: "សមត្ថភាពរបស់កុំព្យូទ័រក្នុងការយល់ដឹង បកស្រាយ និងបង្កើតភាសាមនុស្ស ដូចដែលគេប្រើក្នុងប្រព័ន្ធបកប្រែភាសា (Google Translate) ឬ Siri។" },
+            { cat: "Cloud & Web", kh: "ស្ថាបត្យកម្មកុំព្យូទ័រគ្មានម៉ាស៊ីន", en: "Serverless Computing", def: "វិធីសាស្ត្រក្នុងការបង្កើតកម្មវិធីដោយមិនចាំបាច់ខ្វល់ខ្វាយរឿងការគ្រប់គ្រងម៉ាស៊ីនមេ (Servers) ព្រោះក្រុមហ៊ុន Cloud គឺជាអ្នករ៉ាប់រងដំណើរការនេះទាំងស្រុង។" }
+        ];
 
         window.currentCategory = "All";
         window.searchQuery = "";
 
-        const render = () => {
-            const filtered = fullLexicon.filter(item => {
+        // Function ដើម្បីប្តូរផ្ទាំង
+        window.switchTab = (tab) => {
+            const sections = ['officialSection', 'modernSection', 'suggestSection'];
+            const tabs = ['tabOfficial', 'tabModern', 'tabSuggest'];
+            const search = document.getElementById('searchContainer');
+
+            // Reset tabs
+            sections.forEach(id => document.getElementById(id).classList.add('hidden'));
+            tabs.forEach(id => document.getElementById(id).classList.remove('active', 'bg-slate-100'));
+
+            if(tab === 'official') {
+                document.getElementById('officialSection').classList.remove('hidden');
+                document.getElementById('tabOfficial').classList.add('active', 'bg-slate-100');
+                search.classList.remove('hidden');
+            } else if(tab === 'modern') {
+                document.getElementById('modernSection').classList.remove('hidden');
+                document.getElementById('tabModern').classList.add('active', 'bg-slate-100');
+                search.classList.add('hidden'); // លាក់ search សម្រាប់ទំព័រពាក្យថ្មីសិន
+            } else {
+                document.getElementById('suggestSection').classList.remove('hidden');
+                document.getElementById('tabSuggest').classList.add('active', 'bg-slate-100');
+                search.classList.add('hidden');
+            }
+        };
+
+        // Render បញ្ជីពាក្យ NCKL
+        const renderOfficial = () => {
+            const filtered = officialLexicon.filter(item => {
                 const matchesCat = window.currentCategory === "All" || item.cat === window.currentCategory;
                 const matchesSearch = item.kh.includes(window.searchQuery) || item.en.toLowerCase().includes(window.searchQuery.toLowerCase());
                 return matchesCat && matchesSearch;
@@ -360,40 +404,86 @@
             filtered.forEach(item => {
                 const card = document.createElement('div');
                 card.className = "bg-white p-6 rounded-[2rem] shadow-sm border border-slate-200 cursor-pointer hover:border-blue-500 hover:shadow-xl transition-all";
-                card.onclick = () => window.openModal(item);
+                card.onclick = () => window.openModal(item, false);
                 card.innerHTML = `<div><span class="text-[9px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">${item.cat}</span><h3 class="text-xl font-bold text-slate-800 mt-2">${item.kh}</h3><p class="text-xs text-slate-400 font-mono italic mt-1 uppercase">${item.en}</p></div>`;
                 grid.appendChild(card);
             });
             document.getElementById('resultCount').textContent = `${filtered.length} ពាក្យ`;
         };
 
+        // Render បញ្ជីពាក្យថ្មី (Modern)
+        const renderModern = () => {
+            const grid = document.getElementById('modernGrid');
+            grid.innerHTML = '';
+            modernLexicon.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-[2rem] shadow-sm border border-slate-200 cursor-pointer hover:border-purple-500 hover:shadow-xl transition-all group flex flex-col justify-between";
+                card.onclick = () => window.openModal(item, true);
+                card.innerHTML = `
+                    <div>
+                        <span class="text-[10px] font-black text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1 rounded-full border border-purple-100">${item.cat}</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-4 group-hover:text-purple-700 transition-colors">${item.kh}</h3>
+                        <p class="text-sm text-slate-400 font-mono italic mt-1 uppercase">${item.en}</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-50 flex justify-end">
+                        <span class="text-purple-300 group-hover:text-purple-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        };
+
         window.filterCategory = (cat) => {
             window.currentCategory = cat;
             document.querySelectorAll('.category-tab').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            render();
+            renderOfficial();
         };
 
         document.getElementById('searchInput').oninput = (e) => {
             window.searchQuery = e.target.value;
-            render();
+            renderOfficial();
         };
 
-        window.openModal = (item) => {
+        // បង្ហាញ Modal ប្រើរួមគ្នា (ទាំងពាក្យចាស់ និងពាក្យថ្មី)
+        window.openModal = (item, isModern) => {
             document.getElementById('modalKh').textContent = item.kh;
             document.getElementById('modalEn').textContent = item.en;
             document.getElementById('modalDef').textContent = item.def;
             document.getElementById('modalCat').textContent = item.cat.toUpperCase();
+            
+            const header = document.getElementById('modalHeader');
+            const enText = document.getElementById('modalEn');
+            const catBadge = document.getElementById('modalCat');
+
+            if(isModern) {
+                header.className = "bg-gradient-to-br from-purple-800 to-indigo-900 p-8 text-white relative transition-all";
+                enText.className = "text-xl font-bold text-purple-200 italic mt-2 font-mono tracking-widest";
+                catBadge.className = "inline-block px-3 py-1 bg-white/20 rounded-lg text-[10px] font-black uppercase mb-3 tracking-widest backdrop-blur-sm border border-white/30 text-white";
+            } else {
+                header.className = "bg-blue-900 p-8 text-white relative transition-all";
+                enText.className = "text-xl font-bold text-blue-200 italic mt-2 font-mono tracking-widest";
+                catBadge.className = "inline-block px-3 py-1 bg-white/20 rounded-lg text-[10px] font-black uppercase mb-3 tracking-widest backdrop-blur-sm border border-white/30 text-white";
+            }
+
             document.getElementById('detailModal').classList.remove('hidden');
             document.getElementById('detailModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
         };
 
         window.closeModal = () => {
             document.getElementById('detailModal').classList.add('hidden');
             document.getElementById('detailModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
         };
 
-        render();
+        // Initialize Render
+        renderOfficial();
+        renderModern();
+        switchTab('official');
+
     </script>
 </body>
 </html>
